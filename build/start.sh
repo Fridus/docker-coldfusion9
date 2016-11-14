@@ -10,10 +10,12 @@ setConfig () {
 
 # Start
 /sbin/my_init &
-sleep 8
+_WAITING=10
+sleep $_WAITING
 
 # Set mail server
 if [ ! -z $SMTP_PORT_25_TCP_ADDR ]; then
+  echo ''
   echo "Set Mail Server: $SMTP_PORT_25_TCP_ADDR"
   setConfig mail setMailServer "{\"server\": \"$SMTP_PORT_25_TCP_ADDR\"}"
   echo ''
@@ -37,6 +39,7 @@ if [ ! -z $DATASOURCE_NAME ]; then
   fi
   _ARGS+='}'
 
+  echo ''
   echo "Set datasource: $DATASOURCE_NAME"
   setConfig datasource setMySQL5 $_ARGS
 fi

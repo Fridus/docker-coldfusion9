@@ -10,6 +10,9 @@ RUN a2enmod rewrite && a2enmod headers
 # Timezone
 RUN echo Europe/Brussels | sudo tee /etc/timezone && sudo dpkg-reconfigure --frontend noninteractive tzdata
 
+# Fix paths of assets
+RUN echo "Alias \"/CFIDE\" \"/opt/coldfusion9/wwwroot/CFIDE\"" >> /etc/apache2/httpd.conf
+
 ADD ./build/start.sh /start.sh
 RUN chmod +x /start.sh
 
